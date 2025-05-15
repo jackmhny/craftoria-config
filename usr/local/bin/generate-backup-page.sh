@@ -14,7 +14,7 @@ cat > "$WEBPAGE" <<'HTML'
     html, body {
       background: #000;
       color: #fff;
-      font-family: monospace;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
       margin: 0;
       padding: 0;
       height: 100%;
