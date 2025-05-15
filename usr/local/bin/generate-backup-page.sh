@@ -95,7 +95,7 @@ cat >> "$WEBPAGE" <<HTML
     </tbody>
   </table>
   <footer>
-    Generated on $(date +"%Y-%m-%d %H:%M:%S")
+    Generated on $(date +"%Y-%m-%d %H:%M:%S") | <a href="https://mc.jackmhny.xyz" style="color: #aaa; text-decoration: underline;">Home</a>
   </footer>
 </body>
 </html>
@@ -105,3 +105,15 @@ HTML
 chmod 644 "$WEBPAGE"
 chown root:www-data "$WEBPAGE"
 
+# Git commit hook to sync the HTML page
+echo "Syncing backup page to git repository..."
+
+# Add the updated file to git
+cfgit add "$WEBPAGE"
+
+# Create a commit with timestamp
+cfgit commit -m "Update backup page: $(date +"%Y-%m-%d %H:%M:%S")" --quiet || echo "No changes to commit"
+
+cfgit push origin master
+
+echo "Git sync complete"
