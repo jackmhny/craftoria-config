@@ -1,0 +1,17 @@
+[Unit]
+Description=ngrok tunnel for Minecraft
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/opt/minecraft
+ExecStart=/usr/bin/ngrok tcp \
+    --authtoken 2Jmv1aCLiXf2RjeTRzlAHQpUQ7v_7YCLtEFbPiyYmvZaXjEHd \
+    --region=us \
+    --remote-addr=7.tcp.ngrok.io:20947 \
+    25565
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

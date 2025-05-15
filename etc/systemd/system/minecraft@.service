@@ -1,0 +1,22 @@
+[Unit]
+Description=Craftoria Minecraft Server %i
+After=network.target
+
+[Service]
+User=minecraft
+Nice=5
+WorkingDirectory=/opt/minecraft
+ExecStart=/opt/minecraft/startserver.sh
+SuccessExitStatus=0 1
+Restart=on-failure
+RestartSec=20
+
+# Security hardening
+ProtectSystem=full
+PrivateDevices=true
+NoNewPrivileges=true
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
+
