@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Craftoria Backups</title>
+  <style>
+    :root {
+      --background: #000;
+      --foreground: #fff;
+      --primary: #3b82f6;
+      --primary-foreground: #fff;
+      --card: #111;
+      --card-foreground: #fff;
+      --border: #333;
+      --radius: 6px;
+    }
+
+    html, body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
+    header p {
+      margin: 0.5rem 0;
+      opacity: 0.8;
+    }
+
+    .info-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .info-item {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+    }
+
+    .info-item:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .info-label {
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .info-value {
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+    }
+
+    .info-item a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .info-item a:hover {
+      opacity: 0.8;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 900px;
+      background-color: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    thead th {
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: rgba(255,255,255,0.03);
+    }
+
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1rem;
+      }
+
+      .info-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      table {
+        font-size: 0.9rem;
+      }
+
+      td, th {
+        padding: 0.5rem 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Craftoria Backups</h1>
+    <p>Automated backup summary</p>
+    <div class="info-bar">
+      <div class="info-item">
+        <span class="info-label">Server:</span><a href="https://mc.jackmhny.xyz"><code class="info-value">mc.jackmhny.xyz</code></a>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Map:</span><a href="https://map.jackmhny.xyz" target="_blank"><code class="info-value">map.jackmhny.xyz</code></a>
+      </div>
+    </div>
+  </header>
+  <table>
+    <thead>
+      <tr>
+        <th>Archive</th>
+        <th>Original</th>
+        <th>Compressed</th>
+        <th>Deduplicated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>minecraft-2025-05-13_14-00</td><td>1.75 GB</td><td>1.46 GB</td><td>61.24 MB</td></tr>
+      <tr><td>minecraft-2025-05-13_14-16</td><td>1.75 GB</td><td>1.46 GB</td><td>62.60 MB</td></tr>
+      <tr><td>minecraft-2025-05-14_03-01</td><td>2.81 GB</td><td>2.29 GB</td><td>273.75 MB</td></tr>
+      <tr><td>minecraft-2025-05-15_11-38</td><td>3.64 GB</td><td>2.91 GB</td><td>1.15 GB</td></tr>
+    </tbody>
+  </table>
+  <div class="info-bar" style="margin-top: 2rem;">
+    <div class="info-item">
+      <span class="info-label">Updated:</span><code class="info-value">2025-05-15 12:45</code>
+    </div>
+  </div>
+  <footer>
+    Craftoria Minecraft Server
+  </footer>
+</body>
+</html>
+

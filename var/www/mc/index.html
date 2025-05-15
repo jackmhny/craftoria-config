@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gooncraft - Minecraft Server</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: #ffffff;
+            --foreground: #0f172a;
+            --card: #ffffff;
+            --card-foreground: #0f172a;
+            --popover: #ffffff;
+            --popover-foreground: #0f172a;
+            --primary: #18181b;
+            --primary-foreground: #f8fafc;
+            --secondary: #f1f5f9;
+            --secondary-foreground: #0f172a;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --accent: #f1f5f9;
+            --accent-foreground: #0f172a;
+            --destructive: #ef4444;
+            --destructive-foreground: #f8fafc;
+            --border: #e2e8f0;
+            --input: #e2e8f0;
+            --ring: #94a3b8;
+            --radius: 0.5rem;
+        }
+
+        .dark {
+            --background: #0f172a;
+            --foreground: #f8fafc;
+            --card: #1e293b;
+            --card-foreground: #f8fafc;
+            --popover: #1e293b;
+            --popover-foreground: #f8fafc;
+            --primary: #f8fafc;
+            --primary-foreground: #0f172a;
+            --secondary: #1e293b;
+            --secondary-foreground: #f8fafc;
+            --muted: #1e293b;
+            --muted-foreground: #94a3b8;
+            --accent: #1e293b;
+            --accent-foreground: #f8fafc;
+            --destructive: #7f1d1d;
+            --destructive-foreground: #f8fafc;
+            --border: #1e293b;
+            --input: #1e293b;
+            --ring: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--foreground);
+            background-color: var(--background);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0 10px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            margin-bottom: 24px;
+        }
+
+        p {
+            color: var(--muted-foreground);
+            margin-bottom: 16px;
+        }
+
+        .server-address {
+            background-color: var(--card);
+            color: var(--card-foreground);
+            border: 1px solid var(--border);
+            padding: 16px 24px;
+            border-radius: var(--radius);
+            display: inline-block;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 24px 0;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .card {
+            background-color: var(--card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 48px 0;
+        }
+
+        ol {
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 16px;
+            color: var(--foreground);
+        }
+
+        a {
+            color: var(--foreground);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2px;
+        }
+
+        a:hover {
+            color: var(--muted-foreground);
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-size: 0.875rem;
+            height: 40px;
+            padding: 0 16px;
+            border: none;
+        }
+
+        .button-primary {
+            background-color: var(--primary);
+            color: var(--primary-foreground);
+        }
+
+        .button-primary:hover {
+            opacity: 0.9;
+            color: var(--primary-foreground);
+        }
+
+        .button-secondary {
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+        }
+
+        .button-secondary:hover {
+            background-color: var(--muted);
+            color: var(--secondary-foreground);
+        }
+
+        .map-section {
+            text-align: center;
+        }
+
+        .steps-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .step-image-container {
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background-color: var(--card);
+        }
+
+        .step-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+
+        .step-image-container:hover .step-image {
+            transform: scale(1.02);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 8px 12px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 48px 0 24px;
+            color: var(--muted-foreground);
+            font-size: 0.875rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .server-address {
+                font-size: 1rem;
+                padding: 12px 16px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .steps-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="document.documentElement.classList.toggle('dark')">
+        Toggle theme
+    </button>
+
+    <div class="container">
+        <header>
+            <h1>Gooncraft</h1>
+            <p>A premium Minecraft experience</p>
+            <div class="server-address">mc.jackmhny.xyz</div>
+            <div><iframe src="https://discordapp.com/widget?id=1371280396292984944" width="350" height="250" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe></div>
+        </header>
+
+        <section>
+            <div class="card">
+                <h2>How to Join</h2>
+                <ol>
+                    <li>Install <a href="https://prismlauncher.org/" target="_blank">Prism Launcher</a></li>
+                    <li>Create a new instance</li>
+                    <li>Select CurseForge, search Craftoria, and select OK</li>
+                    <li>Click Open Missing to open ~12 mods in chrome. Switch to chrome and load each tab so the files download.</li>
+                    <li>Make sure all the mod links are green then hit OK.</li>
+                    <li>Double click the new Craftoria instance to launch!</li>
+                    <li>Multiplayer → Direct Connection → Type <strong>mc.jackmhny.xyz</strong> and join</li>
+                </ol>
+
+                <div class="steps-images">
+                    <div class="step-image-container">
+                        <img src="images/step1.png" alt="Create new instance" class="step-image">
+                    </div>
+                    <div class="step-image-container">
+                        <img src="images/step2.png" alt="Select Craftoria" class="step-image">
+                    </div>
+                    <div class="step-image-container">
+                        <img src="images/step3.png" alt="Open missing mods" class="step-image">
+                    </div>
+                    <div class="step-image-container">
+                        <img src="images/step4.png" alt="Download mods" class="step-image">
+                    </div>
+                    <div class="step-image-container">
+                        <img src="images/step5.png" alt="Green mod links" class="step-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="card">
+                <h2>Live World Map</h2>
+                <p>Explore our world and see builds in real time</p>
+                <a href="https://map.jackmhny.xyz" class="button button-primary" target="_blank">VIEW LIVE MAP</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Simple theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        // Set initial theme based on user preference
+        if (prefersDark) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</body>
+</html>
