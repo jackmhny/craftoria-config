@@ -99,7 +99,7 @@
 
         .server-address {
             background-color: var(--card);
-            color: var(--card-foreground);
+            /* color: var(--card-foreground); -- Style replaced by .info-item */
             border: 1px solid var(--border);
             padding: 16px 24px;
             border-radius: var(--radius);
@@ -111,6 +111,53 @@
             transition: all 0.2s ease;
         }
 
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 24px 0; /* Consistent with old .server-address margin */
+        }
+
+        .info-item {
+            display: inline-flex; 
+            align-items: center;
+            background-color: var(--primary); /* For good contrast with label text */
+            color: var(--primary-foreground); /* Text color for the item */
+            border: 1px solid var(--border); 
+            padding: 10px 16px;
+            border-radius: var(--radius);
+            font-size: 0.9rem; 
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .info-item:hover {
+            opacity: 0.9; 
+            transform: translateY(-1px);
+        }
+
+        .info-label {
+            font-weight: bold; /* "bold white text" part 1: bold */
+            /* Color inherited from .info-item (var(--primary-foreground)) which is light on dark primary, dark on light primary */
+            margin-right: 8px; /* Space between label and value */
+        }
+
+        .info-value {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; /* "monospace" part */
+        }
+
+        .info-item a {
+            color: inherit; /* Links use the same color as .info-item text */
+            text-decoration: underline;
+            border-bottom: none; /* Override global 'a' styles */
+            padding-bottom: 0; /* Override global 'a' styles */
+        }
+
+        .info-item a:hover {
+            opacity: 0.8;
+        }
         .card {
             background-color: var(--card);
             border-radius: var(--radius);
@@ -187,8 +234,8 @@
         }
 
         .map-section {
-            text-align: center;
-        }
+            /* text-align: center; -- This class is no longer used as the section is removed */
+        } /* Rule kept for line numbering consistency, content commented */
 
         .steps-images {
             display: grid;
@@ -247,9 +294,9 @@
             }
 
             .server-address {
-                font-size: 1rem;
-                padding: 12px 16px;
-            }
+                /* font-size: 1rem; -- .server-address class removed */
+                /* padding: 12px 16px; -- .info-item handles its own sizing */
+            } /* Rule kept for line numbering consistency, content commented */
 
             h2 {
                 font-size: 1.5rem;
@@ -270,7 +317,17 @@
         <header>
             <h1>Gooncraft</h1>
             <p>A premium Minecraft experience</p>
-            <div class="server-address">mc.jackmhny.xyz</div>
+            <div class="info-bar">
+                <div class="info-item">
+                    <span class="info-label">IP:</span><code class="info-value">mc.jackmhny.xyz</code>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Map:</span><a href="https://map.jackmhny.xyz" target="_blank"><code class="info-value">map.jackmhny.xyz</code></a>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Backups:</span><a href="https://mc.jackmhny.xyz/backups" target="_blank"><code class="info-value">mc.jackmhny.xyz/backups</code></a>
+                </div>
+            </div>
             <div><iframe src="https://discordapp.com/widget?id=1371280396292984944" width="350" height="250" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe></div>
         </header>
 
@@ -304,14 +361,6 @@
                         <img src="images/step5.png" alt="Green mod links" class="step-image">
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="map-section">
-            <div class="card">
-                <h2>Live World Map</h2>
-                <p>Explore our world and see builds in real time</p>
-                <a href="https://map.jackmhny.xyz" class="button button-primary" target="_blank">VIEW LIVE MAP</a>
             </div>
         </section>
     </div>
