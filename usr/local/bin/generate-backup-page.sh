@@ -109,11 +109,11 @@ chown root:www-data "$WEBPAGE"
 echo "Syncing backup page to git repository..."
 
 # Add the updated file to git
-cfgit add "$WEBPAGE"
+git --git-dir=/.config-repo.git --work-tree=/ add "$WEBPAGE"
 
 # Create a commit with timestamp
-cfgit commit -m "Update backup page: $(date +"%Y-%m-%d %H:%M:%S")" --quiet || echo "No changes to commit"
+git --git-dir=/.config-repo.git --work-tree=/ commit -m "Update backup page: $(date +"%Y-%m-%d %H:%M:%S")" --quiet || echo "No changes to commit"
 
-cfgit push origin master
+git --git-dir=/.config-repo.git --work-tree=/ push origin master
 
 echo "Git sync complete"
