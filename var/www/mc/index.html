@@ -351,6 +351,9 @@
                 <div class="info-item">
                     <span class="info-label">Backups:</span><a href="https://mc.jackmhny.xyz/backups" target="_blank"><code class="info-value">mc.jackmhny.xyz/backups</code></a>
                 </div>
+                <div class="info-item" id="player-count-container">
+                    <span class="info-label">Status:</span><code class="info-value" id="player-count">Loading...</code>
+                </div>
             </div>
             <div><iframe src="https://discordapp.com/widget?id=1371280396292984944" width="350" height="250" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe></div>
         </header>
@@ -398,6 +401,53 @@
         if (prefersDark) {
             document.documentElement.classList.add('dark');
         }
+    </script>
+
+    <script>
+        async function fetchPlayerCount() {
+            const serverAddress = 'mc.jackmhny.xyz'; // Your Minecraft server address
+            const playerCountElement = document.getElementById('player-count');
+            const playerCountContainer = document.getElementById('player-count-container');
+
+            // Ensure the HTML element exists before trying to update it
+            if (!playerCountElement) {
+                console.error("Player count HTML element (ID 'player-count') not found.");
+                return;
+            }
+
+            try {
+                // Using mcstatus.io API (v2 for Java Edition)
+                const response = await fetch(`https://api.mcstatus.io/v2/status/java/${serverAddress}`);
+                
+                if (!response.ok) {
+                    let errorMsg = `API request failed: ${response.status}`;
+                    try { // Try to get a more specific error message from the API if it provides one
+                        const errorData = await response.json();
+                        if (errorData && errorData.error) errorMsg += ` - ${errorData.error}`;
+                    } catch (e) { /* Error response might not be JSON, ignore */ }
+                    throw new Error(errorMsg);
+                }
+                
+                const data = await response.json();
+
+                if (data.online) {
+                    playerCountElement.textContent = `${data.players.online} / ${data.players.max} online`;
+                } else {
+                    playerCountElement.textContent = 'Offline';
+                }
+                if (playerCountContainer) playerCountContainer.style.display = 'inline-flex'; // Ensure container is visible
+            } catch (error) {
+                console.error('Error fetching player count:', error.message);
+                playerCountElement.textContent = 'Status N/A';
+                if (playerCountContainer) playerCountContainer.style.display = 'inline-flex'; // Ensure container is visible even on error
+            }
+        }
+
+        // Fetch player count when the page loads
+        fetchPlayerCount();
+
+        // Optionally, refresh the player count periodically (e.g., every 30 seconds)
+        setInterval(fetchPlayerCount, 30000); // 30000 milliseconds = 30 seconds
     </script>
 </body>
 </html>
