@@ -87,17 +87,17 @@ fi
 # 2) Create Borg archive
 DT=$(date +%F_%H-%M)
 log "Creating Borg archive: minecraft-$DT"
-borg create --verbose --compression zstd,6 \
+borg create --remote-path=borg14 --verbose --compression zstd,6 \
     "::minecraft-$DT" "$LOCAL_DIR"
 
 # 3) Prune
 log "Pruning archives (keep 7 daily, 4 weekly, 6 monthly)…"
-borg prune --verbose \
+borg prune --remote-path=borg14 --verbose \
     --keep-daily=7 --keep-weekly=4 --keep-monthly=6
 
 # 4) Compact
 log "Compacting repository to reclaim space…"
-borg compact --verbose
+borg compact --remote-path=borg14 --verbose
 
 # 5) Restart server
 log "Starting Minecraft server…"
