@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+source /root/.borg-env
 
 WEBPAGE=/var/www/mc/backups/index.html
 
@@ -79,8 +80,8 @@ cat > "$WEBPAGE" <<'HTML'
 HTML
 
 # Loop through archives and emit table rows
-borg list --format="{archive}{NEWLINE}" | while IFS= read -r archive; do
-  borg info "::${archive}" | awk -v arch="$archive" '
+borg list --remote-path=borg14 --format="{archive}{NEWLINE}" | while IFS= read -r archive; do
+  borg info --remote-path=borg14 "::${archive}" | awk -v arch="$archive" '
     /This archive:/ {
       orig   = $(NF-5) " " $(NF-4)
       comp   = $(NF-3) " " $(NF-2)
